@@ -11,16 +11,12 @@ public class ClienteServiceImpl implements IClienteService{
 
 	private List<Cliente> clientes;
 	
-	
-	
 	public ClienteServiceImpl() {
 		clientes = new ArrayList<Cliente>();
 	}
 	public ClienteServiceImpl(List<Cliente> clientes) {
 		this.clientes = new ArrayList<>(clientes);
 	} 
-	
-		
 	
 	@Override
 	public Cliente create(Cliente cliente) {
@@ -30,6 +26,11 @@ public class ClienteServiceImpl implements IClienteService{
 
 	@Override
 	public Cliente findClienteById(int indice) {
+		for(Cliente cliente: this.clientes) {
+			if(cliente.getId() == indice) {
+				return cliente;
+			}
+		}
 		return null;
 	}
 
@@ -52,27 +53,25 @@ public class ClienteServiceImpl implements IClienteService{
 
 	@Override
 	public boolean updateCliente(Cliente cliente) {
-		
 		if(this.clientes.contains(cliente)) {
-			
 			int indiceDoObjeto = this.clientes.indexOf(cliente);
 			this.clientes.remove(cliente);
 			this.clientes.add(indiceDoObjeto, cliente);
 			return true;
-			
 		}else {		
-			
 			return false;
-			
 		}
-		
 	}
 
 	@Override
 	public boolean deleteCliente(int indice) {
-		return false;
+		Cliente cliente = findClienteById(indice);
+		if(cliente == null) {
+			return false;
+		}
+		else{
+			this.clientes.remove(cliente);
+			return true;
+		}
 	}
-	
-	
-	
 }
