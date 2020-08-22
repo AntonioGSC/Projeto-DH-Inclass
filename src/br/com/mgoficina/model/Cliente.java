@@ -99,6 +99,12 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return getId() + "\n" + getNome() + "\n" + getCpf() + "\n" + getIdade() + "\n" + getSexo() + "\n\n";
+		StringBuilder string = new StringBuilder();
+		string.append("   Id: " + this.getId() + "\n");
+		string.append(" Nome: " + this.getNome() + "\n");
+		string.append("  CPF: " + this.getCpf() + "\n");
+		string.append("Idade: " + this.getIdade() + "\n");
+		string.append(" Sexo: " + this.getSexo() + "\n");
+		return string.toString();
 	}
 }
