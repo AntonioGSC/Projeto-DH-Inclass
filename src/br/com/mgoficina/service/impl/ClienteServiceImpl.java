@@ -25,7 +25,7 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public Cliente findClienteById(int indice) {
+	public Cliente findClienteById(long indice) {
 		for(Cliente cliente: this.clientes) {
 			if(cliente.getId() == indice) {
 				return cliente;
@@ -64,7 +64,7 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public boolean deleteCliente(int indice) {
+	public boolean deleteCliente(long indice) {
 		Cliente cliente = findClienteById(indice);
 		if(cliente == null) {
 			return false;

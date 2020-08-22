@@ -1,20 +1,37 @@
 package br.com.mgoficina.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
 	
-	private int id;
+	private long id;
 	private String nome;
 	private String cpf;
 	private int idade;
 	private char sexo;
+	private List<Veiculo> veiculos;
 	
-	public Cliente(String nome, String cpf, int idade, char sexo) {
+	public Cliente(String nome, String cpf, int idade, char sexo, long id) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.sexo = sexo;
-		this.id++;
+		this.id = id;
+		this.veiculos = new ArrayList<Veiculo>();
+	}
+
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = new ArrayList<>(veiculos);
+	}
+	
+	public void setVeiculos(Veiculo veiculo) {
+		this.veiculos.add(veiculo);
 	}
 
 	public String getNome() {
@@ -49,23 +66,19 @@ public class Cliente {
 		this.sexo = sexo;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + id;
-		result = prime * result + idade;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + sexo;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -78,29 +91,15 @@ public class Cliente {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
-			return false;
 		if (id != other.id)
-			return false;
-		if (idade != other.idade)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (sexo != other.sexo)
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append("   Id: " + this.getId() + "\n");
+		string.append("\n   Id: " + this.getId() + "\n");
 		string.append(" Nome: " + this.getNome() + "\n");
 		string.append("  CPF: " + this.getCpf() + "\n");
 		string.append("Idade: " + this.getIdade() + "\n");
