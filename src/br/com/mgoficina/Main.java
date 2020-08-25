@@ -19,14 +19,8 @@ public class Main {
 		List<Cliente> lista = new ArrayList<>();
 		lista.add(cliente1);
 		
-		IClienteService clienteService = new ClienteServiceImpl(lista);
+		IClienteService clienteService = new ClienteServiceImpl();
 		clienteService.create(cliente2);
 		System.out.println(clienteService.findAll());
-//		System.out.println(clienteService.findClienteById(123));
-		clienteService.updateCliente(cliente3);
-		System.out.println(clienteService.findAll());
-		cliente1.setVeiculos(veiculo1);
-		cliente1.setVeiculos(veiculo2);
-		System.out.println(cliente1.getVeiculos());
 	}
 }

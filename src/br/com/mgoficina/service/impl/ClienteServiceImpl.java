@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.com.mgoficina.exception.NoDataException;
 import br.com.mgoficina.exception.ObjectNotFoundException;
 import br.com.mgoficina.model.Cliente;
 import br.com.mgoficina.service.IClienteService;
@@ -15,6 +16,7 @@ public class ClienteServiceImpl implements IClienteService{
 	public ClienteServiceImpl() {
 		clientes = new ArrayList<Cliente>();
 	}
+	
 	public ClienteServiceImpl(List<Cliente> clientes) {
 		this.clientes = new ArrayList<>(clientes);
 	} 
@@ -31,11 +33,8 @@ public class ClienteServiceImpl implements IClienteService{
 			if(cliente.getId() == indice) {
 				return cliente;
 			}
-			else {
-				throw new ObjectNotFoundException("Cliente não encontrado !");
-			}
 		}
-		return null;
+		throw new ObjectNotFoundException("Cliente não encontrado ! ID: " + indice);
 	}
 
 	@Override
@@ -44,27 +43,27 @@ public class ClienteServiceImpl implements IClienteService{
 			if(cliente.getNome().equals(nome)) {
 				return cliente;
 			}
-			else {
-				throw new ObjectNotFoundException("Cliente não encontrado !");
-			}
 		}
-		return null;
+		throw new ObjectNotFoundException("Cliente não encontrado ! Nome: " + nome);
 	}
 
 	@Override
-	public List<Cliente> findAll() {
+	public List<Cliente> findAll() throws NoDataException{
+		if(this.clientes.size() == 0) {
+			throw new NoDataException("Nenhum cliente cadastrado !");
+		}
 		return Collections.unmodifiableList(this.clientes);
 	}
 
 	@Override
-	public boolean updateCliente(Cliente cliente) {
+	public boolean updateCliente(Cliente cliente) throws ObjectNotFoundException{
 		if(this.clientes.contains(cliente)) {
 			int indiceDoObjeto = this.clientes.indexOf(cliente);
 			this.clientes.remove(cliente);
 			this.clientes.add(indiceDoObjeto, cliente);
 			return true;
 		}else {		
-			return false;
+			throw new ObjectNotFoundException("Cliente não encontrado ! ID: " + cliente.getId());
 		}
 	}
 
@@ -72,7 +71,7 @@ public class ClienteServiceImpl implements IClienteService{
 	public boolean deleteCliente(long indice) throws ObjectNotFoundException{
 		Cliente cliente = findClienteById(indice);
 		if(cliente == null) {
-			throw new ObjectNotFoundException("Cliente não encontrado !");
+			throw new ObjectNotFoundException("Cliente não encontrado ! ID: " + indice);
 		}
 		else{
 			this.clientes.remove(cliente);
