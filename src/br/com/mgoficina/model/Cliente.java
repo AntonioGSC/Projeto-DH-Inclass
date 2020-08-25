@@ -1,6 +1,7 @@
 package br.com.mgoficina.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Cliente {
@@ -23,13 +24,13 @@ public class Cliente {
 	}
 
 	public List<Veiculo> getVeiculos() {
-		return veiculos;
+		return Collections.unmodifiableList(veiculos);
 	}
 
+	//Sobrecarga
 	public void setVeiculos(List<Veiculo> veiculos) {
 		this.veiculos = new ArrayList<>(veiculos);
 	}
-	
 	public void setVeiculos(Veiculo veiculo) {
 		this.veiculos.add(veiculo);
 	}

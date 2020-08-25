@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.com.mgoficina.exception.ObjectNotFoundException;
 import br.com.mgoficina.model.Cliente;
 import br.com.mgoficina.service.IClienteService;
 
@@ -25,24 +26,28 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public Cliente findClienteById(long indice) {
+	public Cliente findClienteById(long indice) throws ObjectNotFoundException{
 		for(Cliente cliente: this.clientes) {
 			if(cliente.getId() == indice) {
 				return cliente;
+			}
+			else {
+				throw new ObjectNotFoundException("Cliente não encontrado !");
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public Cliente findClienteByNome(String nome) {
-		
+	public Cliente findClienteByNome(String nome) throws ObjectNotFoundException{		
 		for(Cliente cliente: this.clientes) {
 			if(cliente.getNome().equals(nome)) {
 				return cliente;
 			}
+			else {
+				throw new ObjectNotFoundException("Cliente não encontrado !");
+			}
 		}
-		
 		return null;
 	}
 
@@ -64,10 +69,10 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public boolean deleteCliente(long indice) {
+	public boolean deleteCliente(long indice) throws ObjectNotFoundException{
 		Cliente cliente = findClienteById(indice);
 		if(cliente == null) {
-			return false;
+			throw new ObjectNotFoundException("Cliente não encontrado !");
 		}
 		else{
 			this.clientes.remove(cliente);

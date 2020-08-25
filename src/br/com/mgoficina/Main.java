@@ -22,6 +22,7 @@ public class Main {
 		IClienteService clienteService = new ClienteServiceImpl(lista);
 		clienteService.create(cliente2);
 		System.out.println(clienteService.findAll());
+//		System.out.println(clienteService.findClienteById(123));
 		clienteService.updateCliente(cliente3);
 		System.out.println(clienteService.findAll());
 		cliente1.setVeiculos(veiculo1);
