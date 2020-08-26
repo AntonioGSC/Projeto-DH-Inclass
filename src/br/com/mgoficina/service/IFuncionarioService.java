@@ -1,5 +1,7 @@
 package br.com.mgoficina.service;
 
-public interface IFuncionarioService {
+import br.com.mgoficina.model.Funcionario;
+
+public interface IFuncionarioService extends IService<Funcionario>{
 
 }

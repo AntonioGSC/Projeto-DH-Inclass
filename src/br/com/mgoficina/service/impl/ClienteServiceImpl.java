@@ -28,7 +28,7 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public Cliente findClienteById(long indice) throws ObjectNotFoundException{
+	public Cliente findById(long indice) throws ObjectNotFoundException{
 		for(Cliente cliente: this.clientes) {
 			if(cliente.getId() == indice) {
 				return cliente;
@@ -56,7 +56,7 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public boolean updateCliente(Cliente cliente) throws ObjectNotFoundException{
+	public boolean update(Cliente cliente) throws ObjectNotFoundException{
 		if(this.clientes.contains(cliente)) {
 			int indiceDoObjeto = this.clientes.indexOf(cliente);
 			this.clientes.remove(cliente);
@@ -68,8 +68,8 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public boolean deleteCliente(long indice) throws ObjectNotFoundException{
-		Cliente cliente = findClienteById(indice);
+	public boolean delete(long indice) throws ObjectNotFoundException{
+		Cliente cliente = findById(indice);
 		if(cliente == null) {
 			throw new ObjectNotFoundException("Cliente não encontrado ! ID: " + indice);
 		}

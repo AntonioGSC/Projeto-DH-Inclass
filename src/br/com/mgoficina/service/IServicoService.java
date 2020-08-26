@@ -1,5 +1,7 @@
 package br.com.mgoficina.service;
 
-public interface IServicoService {
+import br.com.mgoficina.model.Servico;
+
+public interface IServicoService extends IService<Servico>{
 
 }
