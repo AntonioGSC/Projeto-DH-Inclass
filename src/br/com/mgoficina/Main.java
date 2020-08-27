@@ -22,5 +22,6 @@ public class Main {
 		IClienteService clienteService = new ClienteServiceImpl();
 		clienteService.create(cliente2);
 		System.out.println(clienteService.findAll());
+		System.out.println(clienteService.findClienteByNome("Vinicius"));
 	}
 }

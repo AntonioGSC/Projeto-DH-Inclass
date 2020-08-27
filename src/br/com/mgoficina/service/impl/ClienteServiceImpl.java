@@ -38,13 +38,11 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public Cliente findClienteByNome(String nome) throws ObjectNotFoundException{		
-		for(Cliente cliente: this.clientes) {
-			if(cliente.getNome().equals(nome)) {
-				return cliente;
-			}
-		}
-		throw new ObjectNotFoundException("Cliente não encontrado ! Nome: " + nome);
+	public Cliente findClienteByNome(String nome) throws ObjectNotFoundException{
+		return this.clientes.stream()
+						.filter(cliente -> cliente.getNome().equals(nome))
+						.findAny()
+						.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado ! Nome: " + nome));
 	}
 
 	@Override
