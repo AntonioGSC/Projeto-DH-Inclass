@@ -7,14 +7,33 @@ public class Funcionario {
 	private int idade;
 	private char sexo;
 	private String cargo;
+	private Long id;
+	private String login;
 	
-	public Funcionario(String nome, String cpf, int idade, char sexo, String cargo) {
-		super();
+	public Funcionario(String nome, String cpf, int idade, char sexo, String cargo, Long id, String login) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.sexo = sexo;
 		this.cargo = cargo;
+		this.id = id;
+		this.login = login;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getNome() {

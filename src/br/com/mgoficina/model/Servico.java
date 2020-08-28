@@ -4,8 +4,7 @@ import java.time.LocalDate;
 
 public class Servico {
 	
-	private long id;
-	private String nome;
+	private Long id;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	private double valor;
@@ -13,10 +12,9 @@ public class Servico {
 	private Cliente cliente;
 	private Veiculo veiculo;
 	
-	public Servico(long id, String nome, LocalDate dataInicio, LocalDate dataFim, double valor, String metodoPagamento,
+	public Servico(Long id, LocalDate dataInicio, LocalDate dataFim, double valor, String metodoPagamento,
 			Cliente cliente, Veiculo veiculo) {
 		this.id = id;
-		this.nome = nome;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.valor = valor;
@@ -31,14 +29,6 @@ public class Servico {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public LocalDate getDataInicio() {
@@ -114,12 +104,12 @@ public class Servico {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
+		string.append("\n        ORDEM DE SERVIÇO");
 		string.append("\n             Id: " + this.getId() + "\n");
-		string.append("           Nome: " + this.getNome() + "\n");
 		string.append("     DataInicio: " + this.getDataInicio() + "\n");
 		string.append("        DataFim: " + this.getDataFim() + "\n");
 		string.append("          Valor: " + this.getValor() + "\n");
-		string.append("MetodoPagamento: " + this.getMetodoPagamento() + "\n");
+		string.append("MetodoPagamento: " + this.getMetodoPagamento() + "\n\n");
 		string.append("        Cliente: " + this.getCliente() + "\n");
 		string.append("        Veiculo: " + this.getVeiculo() + "\n");
 		return string.toString();

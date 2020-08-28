@@ -2,7 +2,7 @@ package br.com.mgoficina.model;
 
 public class Veiculo {
 
-	private long id;
+	private Long id;
 	private String placa;
 	private String modelo;
 	private int ano;
@@ -10,7 +10,7 @@ public class Veiculo {
 	private String chassi;
 	private String tipoVeiculo;
 	
-	public Veiculo(String placa, String modelo, int ano, String cor, String chassi, String tipoVeiculo, long id) {
+	public Veiculo(String placa, String modelo, int ano, String cor, String chassi, String tipoVeiculo, Long id) {
 		this.placa = placa;
 		this.modelo = modelo;
 		this.ano = ano;
@@ -101,13 +101,13 @@ public class Veiculo {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append("\n    Id: " + this.getId() + "\n");
-		string.append("  Tipo: " + this.getTipoVeiculo() + "\n");
-		string.append("Modelo: " + this.getModelo() + "\n");
-		string.append("   Ano: " + this.getAno() + "\n");
-		string.append("   Cor: " + this.getCor() + "\n");
-		string.append(" Placa: " + this.getPlaca() + "\n");
-		string.append("Chassi: " + this.getChassi() + "\n");
+		string.append("\n             Id: " + this.getId() + "\n");
+		string.append("           Tipo: " + this.getTipoVeiculo() + "\n");
+		string.append("         Modelo: " + this.getModelo() + "\n");
+		string.append("            Ano: " + this.getAno() + "\n");
+		string.append("            Cor: " + this.getCor() + "\n");
+		string.append("          Placa: " + this.getPlaca() + "\n");
+		string.append("         Chassi: " + this.getChassi() + "\n");
 		return string.toString();
 	}
 }

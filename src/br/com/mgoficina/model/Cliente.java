@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Cliente {
 	
-	private long id;
+	private Long id;
 	private String nome;
 	private String cpf;
 	private int idade;
 	private char sexo;
 	private List<Veiculo> veiculos;
 	
-	public Cliente(String nome, String cpf, int idade, char sexo, long id) {
+	public Cliente(String nome, String cpf, int idade, char sexo, Long id) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
@@ -100,11 +100,11 @@ public class Cliente {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append("\n   Id: " + this.getId() + "\n");
-		string.append(" Nome: " + this.getNome() + "\n");
-		string.append("  CPF: " + this.getCpf() + "\n");
-		string.append("Idade: " + this.getIdade() + "\n");
-		string.append(" Sexo: " + this.getSexo() + "\n");
+		string.append("\n             Id: " + this.getId() + "\n");
+		string.append("           Nome: " + this.getNome() + "\n");
+		string.append("            CPF: " + this.getCpf() + "\n");
+		string.append("          Idade: " + this.getIdade() + "\n");
+		string.append("           Sexo: " + this.getSexo() + "\n");
 		return string.toString();
 	}
 }

@@ -3,8 +3,9 @@ package br.com.mgoficina.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import br.com.mgoficina.exception.NoDataException;
+import br.com.mgoficina.exception.DataIntegrityException;
 import br.com.mgoficina.exception.ObjectNotFoundException;
 import br.com.mgoficina.model.Cliente;
 import br.com.mgoficina.service.IClienteService;
@@ -22,13 +23,21 @@ public class ClienteServiceImpl implements IClienteService{
 	} 
 	
 	@Override
-	public Cliente create(Cliente cliente) {
+	public Cliente create(Cliente cliente) throws DataIntegrityException{
+		if(cliente.getIdade() < 18 && cliente.getIdade() >= 150) {
+			throw new DataIntegrityException("Idade Inválida");
+		}
+		for(Cliente _cliente : this.clientes) {
+			if(_cliente.getId() == cliente.getId()) {
+				throw new DataIntegrityException("IDs Iguais");
+			}
+		}
 		this.clientes.add(cliente);
 		return cliente;
 	}
 
 	@Override
-	public Cliente findById(long indice) throws ObjectNotFoundException{
+	public Cliente findById(Long indice) throws ObjectNotFoundException{
 		for(Cliente cliente: this.clientes) {
 			if(cliente.getId() == indice) {
 				return cliente;
@@ -38,17 +47,21 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public Cliente findClienteByNome(String nome) throws ObjectNotFoundException{
-		return this.clientes.stream()
-						.filter(cliente -> cliente.getNome().equals(nome))
-						.findAny()
-						.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado ! Nome: " + nome));
+	public List<Cliente> findClienteByNome(String nome) throws ObjectNotFoundException{
+		List<Cliente> findNomes = this.clientes.parallelStream()
+				.filter(cliente -> cliente.getNome().equals(nome))
+				.collect(Collectors.toList());
+		
+		if(findNomes.isEmpty()) {
+			throw new ObjectNotFoundException("Cliente não encontrado ! Modelo: " + nome);
+		}
+		return Collections.unmodifiableList(findNomes);
 	}
 
 	@Override
-	public List<Cliente> findAll() throws NoDataException{
+	public List<Cliente> findAll() throws ObjectNotFoundException{
 		if(this.clientes.size() == 0) {
-			throw new NoDataException("Nenhum cliente cadastrado !");
+			throw new ObjectNotFoundException("Nenhum cliente cadastrado !");
 		}
 		return Collections.unmodifiableList(this.clientes);
 	}
@@ -66,7 +79,7 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	public boolean delete(long indice) throws ObjectNotFoundException{
+	public boolean delete(Long indice) throws ObjectNotFoundException{
 		Cliente cliente = findById(indice);
 		if(cliente == null) {
 			throw new ObjectNotFoundException("Cliente não encontrado ! ID: " + indice);
