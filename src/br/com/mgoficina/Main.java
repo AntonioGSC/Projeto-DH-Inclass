@@ -25,7 +25,7 @@ public class Main {
 		Cliente cliente49 = new Cliente("Eduarda Nogueira", "686.031.681-05", 30, 'F', 49L);
 		Veiculo veiculo1 = new Veiculo("23114-12", "Palio", 2014, "Vermelho", "48128458128858", "Carro", 1L);
 		Veiculo veiculo2 = new Veiculo("23114-12", "Palio", 2014, "Vermelho", "48128458128858", "Carro", 2L);
-		Servico servico = new Servico(1L, LocalDate.of(2020, 1, 01), LocalDate.of(2020, 4, 1), 2301.10, "Credito", cliente49, veiculo1);
+		Servico servico = new Servico(1L, LocalDate.of(2020, 1, 01), LocalDate.of(2020, 2, 1), 2301.10, "Credito", cliente49, veiculo1);
 		Servico servico2 = new Servico(2L, LocalDate.of(2020, 1, 01), LocalDate.of(2020, 4, 1), 2301.10, "Credito", cliente49, veiculo2);
 		Servico servico3 = new Servico(3L, LocalDate.of(2020, 1, 01), LocalDate.of(2020, 9, 1), 2301.10, "Credito", cliente2, veiculo2);
 		
@@ -40,7 +40,8 @@ public class Main {
 		servicoService.create(servico3);
 		clienteService.create(cliente1);
 		clienteService.create(cliente2);
-		System.out.println(servicoService.findAll());
+//		System.out.println(servicoService.findAll());
+		System.out.println(servicoService.findByDataStartAndEnd(LocalDate.of(2020, 1, 01), LocalDate.of(2020, 10, 1)));
 //		System.out.println(servicoService.findServicosByDatasFinalizadas(LocalDate.of(2020, 4, 1)));
 		
 		

@@ -9,4 +9,5 @@ public interface IServicoService extends IService<Servico>{
 
 	public List<Servico> findServicosByCliente(Long id);
 	public List<Servico> findServicosByDatasFinalizadas(LocalDate data);
+	public List<Servico> findByDataStartAndEnd(LocalDate dateStart, LocalDate DateEnd);
 }

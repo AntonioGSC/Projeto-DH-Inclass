@@ -93,8 +93,19 @@ public class ServicoServiceImpl implements IServicoService {
 				.filter(servico -> servico.getDataFim().equals(data))
 				.collect(Collectors.toList());
 			if(findServicos.isEmpty()) {
-				throw new ObjectNotFoundException("Nenhuma ordem de Serviço encontrada ! ID: " + data);
+				throw new ObjectNotFoundException("Nenhuma ordem de Serviço encontrada ! Data: " + data);
 			}
 			return Collections.unmodifiableList(findServicos);
+	}
+	
+	@Override
+	public List<Servico> findByDataStartAndEnd (LocalDate dateStart, LocalDate dateEnd) throws ObjectNotFoundException {
+	    List<Servico> findServicos = servicos.stream()
+	    		.filter(servico -> servico.getDataInicio().equals(dateStart) && servico.getDataFim().equals(dateEnd))
+	    		.collect(Collectors.toList());
+	    if (findServicos.isEmpty() ) {
+	    	throw new ObjectNotFoundException("Nenhuma ordem de Serviço encontrada !");
+	    }
+	    return findServicos;    
 	}
 }
